@@ -29,7 +29,7 @@ namespace WindowsFormsApplication1
             {
                 for (int j = 0; j < 14; j++)
                 { 
-                    if (grid.Squares[i,j] > 0)
+                    if (grid.Squares[i, j] > 0)
                     {
                         var ax = i * 21;
                         var ay = j * 21;
@@ -60,6 +60,27 @@ namespace WindowsFormsApplication1
                         var ax = i * 21;
                         var ay = j * 21;
                         graph.DrawRectangle(pen, ax + 6, ay + 6, 10, 10);
+                    }
+                }
+            }
+
+            for (int i = 0; i < 14; i++)
+            {
+                for (int j = 0; j < 14; j++)
+                {
+                    if (grid.Nukleation[i, j] > 0)
+                    {
+                        var a = grid.Nukleation[i, j];
+                        var ax = i * 21;
+                        var ay = j * 21;
+                        if (((a) & 3) > 0)
+                            graph.DrawLine(pen, ax + 10, ay + 10, ax + 15, ay + 5);
+                        if (((a >> 2) & 3) > 0)
+                            graph.DrawLine(pen, ax + 10, ay + 10, ax + 5, ay + 5);
+                        /*if (((a >> 4) & 3) > 0)
+                            graph.DrawLine(pen, ax + 10, ay + 10, ax + 5, ay + 15);*/
+                        if (((a >> 6) & 3) > 0)
+                            graph.DrawLine(pen, ax + 10, ay + 10, ax + 15, ay + 15);
                     }
                 }
             }
@@ -99,6 +120,26 @@ namespace WindowsFormsApplication1
             grid.Move(p, 6, 6, 1, true);
             CreateGraphics().Clear(this.BackColor);
             this.RaisePaintEvent(null, null);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int x2,y2;
+            if (Int32.TryParse(textBox2.Text, out x2))
+                if (Int32.TryParse(textBox3.Text, out y2))
+                {
+                    var x = (byte)x2;
+                    var y = (byte)y2;
+                    textBox4.Text = Convert.ToString(grid.Squares[x, y], 2);
+                    while (textBox4.Text.Length < 8)
+                        textBox4.Text = "0" + textBox4.Text;
+                    textBox5.Text = Convert.ToString(grid.Nope[x, y], 2);
+                    while (textBox5.Text.Length < 8)
+                        textBox5.Text = "0" + textBox5.Text;
+                    textBox6.Text = Convert.ToString(grid.Nukleation[x, y], 2);
+                    while (textBox6.Text.Length < 8)
+                        textBox6.Text = "0" + textBox6.Text;
+                }
         }
     }
 }

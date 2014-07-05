@@ -164,6 +164,10 @@ namespace BlokusAI.CommonStuff
                     return false;
                 if ((Nukleation[ax, ay] & (player | (player << 2) | (player << 4) | (player << 6))) > 0)
                     b = true;
+                if ((ax == 4) && (ay == 4))
+                    b = true;
+                if ((ax == 9) && (ay == 9))
+                    b = true;
             }
             return b;
         }
