@@ -77,8 +77,8 @@ namespace WindowsFormsApplication1
                             graph.DrawLine(pen, ax + 10, ay + 10, ax + 15, ay + 5);
                         if (((a >> 2) & 3) > 0)
                             graph.DrawLine(pen, ax + 10, ay + 10, ax + 5, ay + 5);
-                        /*if (((a >> 4) & 3) > 0)
-                            graph.DrawLine(pen, ax + 10, ay + 10, ax + 5, ay + 15);*/
+                        if (((a >> 4) & 3) > 0)
+                            graph.DrawLine(pen, ax + 10, ay + 10, ax + 5, ay + 15);
                         if (((a >> 6) & 3) > 0)
                             graph.DrawLine(pen, ax + 10, ay + 10, ax + 15, ay + 15);
                     }
