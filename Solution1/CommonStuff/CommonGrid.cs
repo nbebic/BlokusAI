@@ -14,8 +14,7 @@ namespace BlokusAI.CommonStuff
         protected byte[,] nukleation = new byte[14, 14];
 
         public CommonGrid()
-        { 
-        }
+        { }
 
         /// <summary>
         /// Represents Nukleation Points on the Board in this Bit Pattern:
@@ -72,6 +71,7 @@ namespace BlokusAI.CommonStuff
                 return r;
             }
         }
+
         /// <summary>
         /// Moves, with optional validity checking. ONLY TO BE USED WITH GODMODE PLAYERS/TESTERS!
         /// </summary>
@@ -98,7 +98,7 @@ namespace BlokusAI.CommonStuff
             if (!(manualOverride || SafeToMove(p, x, y, player)))
                 throw new IllegalMoveException("nope");// TODO Add some more descriptive text
 
-            foreach(Coord c in p.D)
+            foreach (Coord c in p.D)
             {
                 int ax = c.X + x, ay = c.Y + y;
                 squares[ax, ay] |= player;
@@ -112,10 +112,9 @@ namespace BlokusAI.CommonStuff
                     nope[ax, ay - 1] |= player;
                 if (ay < 13)
                     nope[ax, ay + 1] |= player;
-
             }
 
-            foreach(Coord c in p.D)
+            foreach (Coord c in p.D)
             {
                 int ax = c.X + x, ay = c.Y + y;
                 if (ay < 13)
@@ -136,8 +135,6 @@ namespace BlokusAI.CommonStuff
                     if (ax < 13)
                         nukleation[ax + 1, ay - 1] |= (byte)(((squares[ax + 1, ay - 1] == 0) && ((nope[ax + 1, ay - 1] & player) == 0)) ? player << 4 : 0);
                 }
-
-                
             }
             return this;
         }
@@ -153,9 +150,7 @@ namespace BlokusAI.CommonStuff
         /// <exception cref="ArgumentException">Throws if piece is out of board bounds</exception>
         /// <returns>this</returns>
         public virtual CommonGrid Move(Piece p, byte x, byte y, byte player)
-        { 
-            return Move(p, x, y, player, false);
-        }
+        { return Move(p, x, y, player, false); }
   
         private bool SafeToMove(Piece p, byte x, byte y, byte player)
         {
