@@ -21,15 +21,14 @@ namespace BlokusAI.CommonStuff.Pieces
             new Coord(2,2)},
                 new Nukleation[]{
             new Nukleation(0,0,0),
-            new Nukleation(0,0,0),
-            new Nukleation(1,0,0),
+            new Nukleation(0,0,2),
+            new Nukleation(1,0,4),
             new Nukleation(1,2,0),
-            new Nukleation(2,2,0),
-            new Nukleation(2,2,0)},
+            new Nukleation(2,2,4),
+            new Nukleation(2,2,6)},
                 new Piece[]{
             Z5.instance,
             Z590.instance,
-            Z5180.instance,
             Z5R.instance,
             Z5R90.instance})
         { }
@@ -47,41 +46,14 @@ namespace BlokusAI.CommonStuff.Pieces
             new Coord(2,-2)},
                 new Nukleation[]{
             new Nukleation(0,0,2),
-            new Nukleation(0,0,2),
-            new Nukleation(0,-1,2),
+            new Nukleation(0,0,4),
+            new Nukleation(0,-1,6),
             new Nukleation(2,-1,2),
-            new Nukleation(2,-2,2),
-            new Nukleation(2,-2,2)},
+            new Nukleation(2,-2,6),
+            new Nukleation(2,-2,0)},
                 new Piece[]{
             Z5.instance,
             Z590.instance,
-            Z5180.instance,
-            Z5R.instance,
-            Z5R90.instance})
-        { }
-    }
-
-    public class Z5180 : Piece
-    {
-        public static Z5180 instance = new Z5180();
-        public Z5180()
-            : base(new Coord[]{
-            new Coord(0,0),
-            new Coord(-1,0),
-            new Coord(-1,-1),
-            new Coord(-1,-2),
-            new Coord(-2,-2)},
-                new Nukleation[]{
-            new Nukleation(0,0,4),
-            new Nukleation(0,0,4),
-            new Nukleation(-1,0,4),
-            new Nukleation(-1,-2,4),
-            new Nukleation(-2,-2,4),
-            new Nukleation(-2,-2,4)},
-                new Piece[]{
-            Z5.instance,
-            Z590.instance,
-            Z5180.instance,
             Z5R.instance,
             Z5R90.instance})
         { }
@@ -99,15 +71,14 @@ namespace BlokusAI.CommonStuff.Pieces
             new Coord(-2,2)},
                 new Nukleation[]{
             new Nukleation(0,0,6),
-            new Nukleation(0,0,6),
-            new Nukleation(-1,0,6),
+            new Nukleation(0,0,4),
+            new Nukleation(-1,0,2),
             new Nukleation(-1,2,6),
-            new Nukleation(-2,2,6),
-            new Nukleation(-2,2,6)},
+            new Nukleation(-2,2,2),
+            new Nukleation(-2,2,0)},
                 new Piece[]{
             Z5.instance,
             Z590.instance,
-            Z5180.instance,
             Z5R.instance,
             Z5R90.instance})
         { }
@@ -125,15 +96,14 @@ namespace BlokusAI.CommonStuff.Pieces
             new Coord(-2,-2)},
                 new Nukleation[]{
             new Nukleation(0,0,0),
-            new Nukleation(0,0,0),
-            new Nukleation(0,-1,0),
+            new Nukleation(0,0,6),
+            new Nukleation(0,-1,4),
             new Nukleation(-2,-1,0),
-            new Nukleation(-2,-2,0),
-            new Nukleation(-2,-2,0)},
+            new Nukleation(-2,-2,4),
+            new Nukleation(-2,-2,2)},
                 new Piece[]{
             Z5.instance,
             Z590.instance,
-            Z5180.instance,
             Z5R.instance,
             Z5R90.instance})
         { }

@@ -63,16 +63,16 @@ namespace WindowsFormsApplication1
                 var ay = (n.Y + 6) * 21;
                 switch (n.Orientation)
                 {
-                    case NukleationOrientation.NE:
+                    case NukleationOrientation.SW:
                         graph.DrawLine(pen, ax + 15, ay + 5, ax + 20, ay);
                         break;
-                    case NukleationOrientation.SE:
+                    case NukleationOrientation.NW:
                         graph.DrawLine(pen, ax + 15, ay + 15, ax + 20, ay + 20);
                         break;
-                    case NukleationOrientation.SW:
+                    case NukleationOrientation.NE:
                         graph.DrawLine(pen, ax + 5, ay + 15, ax, ay + 20);
                         break;
-                    case NukleationOrientation.NW:
+                    case NukleationOrientation.SE:
                         graph.DrawLine(pen, ax + 5, ay + 5, ax, ay);
                         break;
                 }
