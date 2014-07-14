@@ -7,190 +7,51 @@ namespace BlokusAI.CommonStuff.Pieces
     public partial class Piece
     {
 
-
-        public static Piece l5 = L5.instance;
-
-        public static Piece y = Y.instance;
-        /*
-        public static Piece N = new Piece(new List<Coord>
-        {
-            new Coord(-2, 0),
-            new Coord(-1, 0),
-            new Coord(0, 0),
-            new Coord(0, 1),
-            new Coord(1, 1)
-        });
-
-        public static Piece V3 = new Piece(new List<Coord>
-        {
-            new Coord(1, 0),
-            new Coord(0, 0),
-            new Coord(0, -1)
-        });
-        public static  Piece U = new Piece(new List<Coord>
-        {
-            new Coord(-1, 1),
-            new Coord(-1, 0),
-            new Coord(0,0),
-            new Coord(1, 0),
-            new Coord(1, 1)
-        });
-
-        public static  Piece V5 = new Piece(new List<Coord>
-        {
-            new Coord(2, 0),
-            new Coord(1, 0),
-            new Coord(0, 0),
-            new Coord(0, 1),
-            new Coord(0, 2)
-        });
-
-        public static  Piece Z5 = new Piece(new List<Coord>
-        {
-            new Coord(1, 1),
-            new Coord(0, 1),
-            new Coord(0, 0),
-            new Coord(0, -1),
-            new Coord(-1, -1)
-        });
-
-        public static  Piece X = new Piece(new List<Coord>
-        {
-            new Coord(0, 1),
-            new Coord(0, 0),
-            new Coord(1, 0),
-            new Coord(-1, 0),
-            new Coord(0, -1)
-        });
-
-        public static  Piece T5 = new Piece(new List<Coord>
-        {
-            new Coord(-1, 0),
-            new Coord(0, 0),
-            new Coord(1, 0),
-            new Coord(0, -1),
-            new Coord(0, -2)
-        });
-
-        public static  Piece W = new Piece(new List<Coord>
-        {
-            new Coord(1, 1),
-            new Coord(0, 1),
-            new Coord(0, 0),
-            new Coord(-1, 0),
-            new Coord(-1, -1)
-        });
-
-        public static  Piece P = new Piece(new List<Coord>
-        {
-            new Coord(0, 1),
-            new Coord(0, 0),
-            new Coord(0, -1),
-            new Coord(1, 0),
-            new Coord(1, -1)
-        });
-
-        public static  Piece F = new Piece(new List<Coord>
-        {
-            new Coord(0, 1),
-            new Coord(0, 0),
-            new Coord(1, 0),
-            new Coord(-1, 0),
-            new Coord(-1, -1)
-        });
-
-        public static  Piece O4 = new Piece(new List<Coord>
-        {
-            new Coord(0, 0),
-            new Coord(1, 0),
-            new Coord(0, -1),
-            new Coord(1, -1)
-        });
-
-        public static Piece L4 = new Piece(new List<Coord>
-        {
-            new Coord(1, 1),
-            new Coord(0, 1),
-            new Coord(0, 0),
-            new Coord(0, -1),
-        });
-
-        public static  Piece T4 = new Piece(new List<Coord>
-        {
-            new Coord(0, 1),
-            new Coord(0, 0),
-            new Coord(1, 0),
-            new Coord(-1, 0)
-        });
-
-        public static  Piece Z4 = new Piece(new List<Coord>
-        {
-            new Coord(-1, 1),
-            new Coord(-1, 0),
-            new Coord(0, 0),
-            new Coord(0, -1)
-        });
-
-        public static  Piece I1 = new Piece(new List<Coord>
-        {
-            new Coord(0, 0)
-        });
-
-        public static  Piece I2 = new Piece(new List<Coord>
-        {
-            new Coord(0, 0),
-            new Coord(0, 1)
-        });
-
-        public static  Piece I3 = new Piece(new List<Coord>
-        {
-            new Coord(0, 0),
-            new Coord(0, 1),
-            new Coord(0, -1)
-        });
-
-        public static  Piece I4 = new Piece(new List<Coord>
-        {
-           new Coord(0, 0),
-           new Coord(0, 1),
-           new Coord(0, -1),
-           new Coord(0, 2)
-        });
-
-        public static  Piece I5 = new Piece(new List<Coord>
-        {
-            new Coord(0, 0),
-            new Coord(0, 1),
-            new Coord(0, -1),
-            new Coord(0, 2),
-            new Coord(0, -2)
-        });
-        */
+        public static Piece l5 = L5.instance; 
+        public static Piece y  =  Y.instance;
+        public static Piece n  =  N.instance;
+        public static Piece v3 = V3.instance;
+        public static Piece u  =  U.instance;
+        public static Piece v5 = V5.instance;
+        public static Piece z5 = Z5.instance;
+        public static Piece x  =  X.instance;
+        public static Piece t5 = T5.instance;
+        public static Piece w  =  W.instance;
+        public static Piece p  =  P.instance;
+        public static Piece f  =  F.instance;
+        public static Piece o4 = O4.instance;
+        public static Piece l4 = L4.instance;
+        public static Piece t4 = T4.instance;
+        public static Piece z4 = Z4.instance;
+        public static Piece i1 = I1.instance;
+        public static Piece i2 = I2.instance;
+        public static Piece i3 = I3.instance;
+        public static Piece i4 = I4.instance;
+        public static Piece i5 = I5.instance;
+        
         public static Dictionary<string, Piece> AllPieces = new Dictionary<string, Piece>
         {
             { "L5", l5 }, 
-            { "Y", y },   /*
-            { "N", N },   /*
-            { "V3", V3 }, /*
-            { "U", U },   /*
-            { "V5", V5 }, /*
-            { "Z5", Z5 }, /*
-            { "X", X },   /*
-            { "T5", T5 }, /*
-            { "W", W },   /*
-            { "P", P },   /*
-            { "F", F },   /*
-            { "O4", O4 }, /*
-            { "L4", L4 }, /*
-            { "T4", T4 }, /*
-            { "Z4", Z4 }, /*
-            { "I1", I1 }, /*
-            { "I2", I2 }, /*
-            { "I3", I3 }, /*
-            { "I4", I4 }, /*
-            { "I5", I5 }  /*
-                          */
-            {"", null}
+            { "Y",  y },   
+            { "N",  n },   
+            { "V3", v3 }, 
+            { "U",  u },   
+            { "V5", v5 }, 
+            { "Z5", z5 }, 
+            { "X",  x },   
+            { "T5", t5 }, 
+            { "W",  w },   
+            { "P",  p },   
+            { "F",  f },   
+            { "O4", o4 }, 
+            { "L4", l4 }, 
+            { "T4", t4 }, 
+            { "Z4", z4 }, 
+            { "I1", i1 }, 
+            { "I2", i2 }, 
+            { "I3", i3 }, 
+            { "I4", i4 }, 
+            { "I5", i5 }
         };
          
         

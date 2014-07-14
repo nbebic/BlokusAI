@@ -60,6 +60,7 @@
     <Compile Include="Pieces\P.cs" />
     <Compile Include="Pieces\Piece.cs" />
     <Compile Include="Pieces\PiecesList.cs" />
+    <Compile Include="Pieces\T4.cs" />
     <Compile Include="Pieces\T5.cs" />
     <Compile Include="Pieces\U.cs" />
     <Compile Include="Pieces\V3.cs" />
