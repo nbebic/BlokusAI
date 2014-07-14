@@ -7,7 +7,7 @@ namespace BlokusAI.CommonStuff.Pieces
     public partial class Piece
     {
         
-
+        /*
         public static Piece L5 = new Piece(new List<Coord>
         {
             new Coord(-2, 0),
@@ -68,7 +68,7 @@ namespace BlokusAI.CommonStuff.Pieces
             new Coord(-1, -1)
         });
 
-        public static  Piece X = new ImmutablePiece(new List<Coord>
+        public static  Piece X = new Piece(new List<Coord>
         {
             new Coord(0, 1),
             new Coord(0, 0),
@@ -113,7 +113,7 @@ namespace BlokusAI.CommonStuff.Pieces
             new Coord(-1, -1)
         });
 
-        public static  Piece O4 = new ImmutablePiece(new List<Coord>
+        public static  Piece O4 = new Piece(new List<Coord>
         {
             new Coord(0, 0),
             new Coord(1, 0),
@@ -145,7 +145,7 @@ namespace BlokusAI.CommonStuff.Pieces
             new Coord(0, -1)
         });
 
-        public static  Piece I1 = new ImmutablePiece(new List<Coord>
+        public static  Piece I1 = new Piece(new List<Coord>
         {
             new Coord(0, 0)
         });
@@ -179,10 +179,10 @@ namespace BlokusAI.CommonStuff.Pieces
             new Coord(0, 2),
             new Coord(0, -2)
         });
-
+        */
         public static Dictionary<string, Piece> AllPieces = new Dictionary<string, Piece>
         {
-            { "L5", L5 }, 
+            /*{ "L5", L5 }, 
             { "Y", Y }, 
             { "N", N }, 
             { "V3", V3 }, 
@@ -203,7 +203,9 @@ namespace BlokusAI.CommonStuff.Pieces
             { "I3", I3 }, 
             { "I4", I4 }, 
             { "I5", I5 }
+             */
         };
+         
         
     }
   

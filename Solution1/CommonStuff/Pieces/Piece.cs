@@ -7,8 +7,10 @@ namespace BlokusAI.CommonStuff.Pieces
 {
     public partial class Piece
     {
-        public sbyte BoundsUp = 0, BoundsDown = 0, BoundsLeft = 0, BoundsRight = 0;
         public Coord[] D;
+
+        public Piece()
+        { }
 
         public Piece(List<Coord> list)
         { D = list.ToArray(); }
@@ -27,19 +29,19 @@ namespace BlokusAI.CommonStuff.Pieces
         }
 
         protected virtual Piece ReflectX()
-        { 
+        {
             foreach (Coord c in D)
                 c.Y = (sbyte)-c.Y;
             return this;
         }
-  
+
         protected virtual Piece ReflectY()
-        { 
+        {
             foreach (Coord c in D)
                 c.X = (sbyte)-c.X;
             return this;
         }
-  
+
         protected virtual Piece ReflectBoth()
         { return ReflectX().ReflectY(); }
 
@@ -58,16 +60,11 @@ namespace BlokusAI.CommonStuff.Pieces
                     throw new Exception("Something happend, something bad");//this should never happen, but still...
             }
         }
-        
+
         protected virtual Piece Rot90()
         {
             for (int i = 0; i < D.Length; i++)
-            { D[i] = new Coord(D[i].Y, ((sbyte)-D[i].X)); }
-            var t = BoundsUp;
-            BoundsUp = BoundsLeft;
-            BoundsLeft = BoundsDown;
-            BoundsDown = BoundsRight;
-            BoundsRight = t;
+                D[i] = new Coord(D[i].Y, ((sbyte)-D[i].X));
             return this;
         }
 

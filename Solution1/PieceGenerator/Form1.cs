@@ -46,7 +46,7 @@ namespace PieceGenerator
                 str.AppendLine("            new Coord([DX5],[DY5]),");
             #endregion
             str.Remove(str.Length - 3, 3);
-            str.AppendLine("\n};");
+            str.AppendLine("\n      };");
 
             #region nukleations
             str.AppendLine("        public Nukleation[] Nukleations = {");
@@ -68,7 +68,7 @@ namespace PieceGenerator
                 str.AppendLine("            new Nukleation([NX8],[NY8],[NO8]),");
             #endregion
             str.Remove(str.Length - 3, 3);
-            str.AppendLine("\n};");
+            str.AppendLine("\n      };");
 
             Orbits(ref str);
 
@@ -134,7 +134,7 @@ namespace PieceGenerator
             if (cbxRR270.Checked)
                 str.AppendLine("            new [NAME]R270(),");
             str.Remove(str.Length - 3, 3);
-            str.AppendLine("\n};");
+            str.AppendLine("\n      };");
         }
 
         private void button1_Click(object sender, EventArgs e)

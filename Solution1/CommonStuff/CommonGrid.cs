@@ -16,17 +16,18 @@ namespace BlokusAI.CommonStuff
         public CommonGrid()
         { }
 
-        /// <summary>
-        /// Represents Nukleation Points on the Board in this Bit Pattern:
-        /// 0000000X - NE for player 1
-        /// 000000X0 - NE for player 2
-        /// 00000X00 - SE for player 1
-        /// 0000X000 - SE for player 2
-        /// 000X0000 - SW for player 1
-        /// 00X00000 - SW for player 2
-        /// 0X000000 - NW for player 1
-        /// X0000000 - NW for player 2
-        /// </summary>
+        /** <summary>
+             Represents Nukleation Points on the Board in this Bit Pattern:<br />
+             0000000X - NE for player 1
+             000000X0 - NE for player 2
+             00000X00 - SE for player 1
+             0000X000 - SE for player 2
+             000X0000 - SW for player 1
+             00X00000 - SW for player 2
+             0X000000 - NW for player 1
+             X0000000 - NW for player 2
+               </summary>
+         */
         public byte[,] Nukleation
         {
             get { return nukleation; }
@@ -83,27 +84,20 @@ namespace BlokusAI.CommonStuff
         /// <exception cref="IllegalMoveException">Throws if the move is not permited</exception>
         /// <exception cref="ArgumentException">Throws if piece is out of board bounds</exception>
         /// <returns>this</returns>
-        public virtual CommonGrid Move(Piece p, byte x, byte y, byte player, bool manualOverride)
+        public virtual CommonGrid Move(Piece p, int x, int y, byte player, bool manualOverride)
         {
-            if (x + p.BoundsDown > 13)
-                throw new ArgumentException("You're doing it wrong", "x");
-            if (x + p.BoundsUp < 0)
-                throw new ArgumentException("You're doing it wrong", "x");
-
-            if (y + p.BoundsLeft < 0)
-                throw new ArgumentException("You're doing it wrong", "y");
-            if (y + p.BoundsRight > 13)
-                throw new ArgumentException("You're doing it wrong", "y");
-
             if (!(manualOverride || SafeToMove(p, x, y, player)))
                 throw new IllegalMoveException("nope");// TODO Add some more descriptive text
 
             foreach (Coord c in p.D)
             {
                 int ax = c.X + x, ay = c.Y + y;
-                squares[ax, ay] |= player;
-                Nukleation[ax, ay] = 0;
-                nope[ax, ay] = 3;
+                if (!((ax < 0) || (ay < 0) || (ax > 13) || (ay > 13)))
+                {
+                    squares[ax, ay] |= player;
+                    Nukleation[ax, ay] = 0;
+                    nope[ax, ay] = 3;
+                }
                 if (ax > 0)
                     nope[ax - 1, ay] |= player;
                 if (ax < 13)
@@ -147,17 +141,18 @@ namespace BlokusAI.CommonStuff
         /// <param name="y">y coordinate of the piece origin</param>
         /// <param name="player">player no (1 or 2)</param>
         /// <exception cref="IllegalMoveException">Throws if the move is not permited</exception>
-        /// <exception cref="ArgumentException">Throws if piece is out of board bounds</exception>
         /// <returns>this</returns>
-        public virtual CommonGrid Move(Piece p, byte x, byte y, byte player)
+        public virtual CommonGrid Move(Piece p, int x, int y, byte player)
         { return Move(p, x, y, player, false); }
   
-        public bool SafeToMove(Piece p, byte x, byte y, byte player)
+        public bool SafeToMove(Piece p, int x, int y, byte player)
         {
             var b = false;
             for (int i = 0; i < p.D.Length; i++)
             {
                 int ax = p.D[i].X + x, ay = p.D[i].Y + y;
+                if ((ax < 0) || (ay < 0) || (ax > 13) || (ay > 13))
+                    return false;
                 if (squares[ax, ay] != 0)
                     return false;
                 if ((nope[ax, ay] & player) > 0)

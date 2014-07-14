@@ -43,14 +43,20 @@
     <Compile Include="IBlokusAI.cs" />
     <Compile Include="IllegalMoveException.cs" />
     <Compile Include="Move.cs" />
-    <Compile Include="Pieces\Axis.cs" />
+    <Compile Include="Axis.cs" />
     <Compile Include="Pieces\L5.cs" />
-    <Compile Include="Pieces\Nukleation.cs" />
-    <Compile Include="Pieces\Coord.cs" />
-    <Compile Include="Pieces\ImmutablePiece.cs" />
-    <Compile Include="Pieces\NukleationOrientation.cs" />
+    <Compile Include="Nukleation.cs" />
+    <Compile Include="Coord.cs" />
+    <Compile Include="NukleationOrientation.cs" />
     <Compile Include="Pieces\Piece.cs" />
+    <Compile Include="Pieces\N.cs" />
     <Compile Include="Pieces\PiecesList.cs" />
+    <Compile Include="Pieces\U.cs" />
+    <Compile Include="Pieces\V3.cs" />
+    <Compile Include="Pieces\V5.cs" />
+    <Compile Include="Pieces\X.cs" />
+    <Compile Include="Pieces\Y.cs" />
+    <Compile Include="Pieces\Z5.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

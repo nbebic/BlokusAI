@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using BlokusAI.CommonStuff;
+using BlokusAI.CommonStuff.Pieces;
 
 namespace WindowsFormsApplication2
 {
@@ -59,7 +60,7 @@ namespace WindowsFormsApplication2
                 CountPl2 = 0;
             }
 
-            public override CommonGrid Move(BlokusAI.CommonStuff.Pieces.Piece p, byte x, byte y, byte player, bool manualOverride)
+            public override CommonGrid Move(Piece p, int x, int y, byte player, bool manualOverride)
             {
                 if (player == 1)
                     CountPl1 += p.D.Length;

@@ -2,7 +2,7 @@
 using System.Linq;
 
 
-namespace BlokusAI.CommonStuff.Pieces
+namespace BlokusAI.CommonStuff
 {
     public class Coord
     {

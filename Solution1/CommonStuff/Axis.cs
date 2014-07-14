@@ -1,4 +1,4 @@
-namespace BlokusAI.CommonStuff.Pieces
+namespace BlokusAI.CommonStuff
 {
     public enum Axis
     {

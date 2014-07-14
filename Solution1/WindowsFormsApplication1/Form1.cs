@@ -89,7 +89,7 @@ namespace WindowsFormsApplication1
             graph.Dispose();
             br.Dispose();
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             if (Piece.AllPieces.ContainsKey(textBox1.Text))
@@ -101,7 +101,7 @@ namespace WindowsFormsApplication1
                 this.RaisePaintEvent(null, null);
             }
         }
-
+        
         private void button2_Click(object sender, EventArgs e)
         {
             p.Rotate(270);
@@ -111,7 +111,7 @@ namespace WindowsFormsApplication1
             CreateGraphics().Clear(this.BackColor);
             this.RaisePaintEvent(null, null);
         }
-
+        
         private void button3_Click(object sender, EventArgs e)
         {
             p.Rotate(90);
