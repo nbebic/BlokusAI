@@ -6,13 +6,13 @@ namespace BlokusAI.CommonStuff.Pieces
 {
     public class Coord
     {
-        public Coord(sbyte x, sbyte y)
+        public Coord(int x, int y)
         {
             X = x;
             Y = y;
         }
 
         public int X { get; set; }
-        public sbyte Y { get; set; }
+        public int Y { get; set; }
     }
 }
