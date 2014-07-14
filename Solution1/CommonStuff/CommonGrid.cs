@@ -152,7 +152,7 @@ namespace BlokusAI.CommonStuff
         public virtual CommonGrid Move(Piece p, byte x, byte y, byte player)
         { return Move(p, x, y, player, false); }
   
-        private bool SafeToMove(Piece p, byte x, byte y, byte player)
+        public bool SafeToMove(Piece p, byte x, byte y, byte player)
         {
             var b = false;
             for (int i = 0; i < p.D.Length; i++)

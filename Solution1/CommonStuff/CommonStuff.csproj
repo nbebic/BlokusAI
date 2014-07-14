@@ -40,7 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonGrid.cs" />
+    <Compile Include="IBlokusAI.cs" />
     <Compile Include="IllegalMoveException.cs" />
+    <Compile Include="Move.cs" />
     <Compile Include="Pieces\Axis.cs" />
     <Compile Include="Pieces\Coord.cs" />
     <Compile Include="Pieces\ImmutablePiece.cs" />
