@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BlokusAI.CommonStuff
 {
-    public struct Nukleation
+    public class Nukleation
     {
-        int X;
-        int Y;
-        NukleationOrientation Orientation;
+        public int X;
+        public int Y;
+        public NukleationOrientation Orientation;
         public Nukleation(int x, int y, byte orientation)
         {
             X = x;

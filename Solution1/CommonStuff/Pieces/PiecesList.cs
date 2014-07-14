@@ -6,26 +6,12 @@ namespace BlokusAI.CommonStuff.Pieces
 {
     public partial class Piece
     {
-        
+
+
+        public static Piece l5 = L5.instance;
+
+        public static Piece y = Y.instance;
         /*
-        public static Piece L5 = new Piece(new List<Coord>
-        {
-            new Coord(-2, 0),
-            new Coord(-1, 0),
-            new Coord(0, 0),
-            new Coord(1, 0),
-            new Coord(1, 1)
-        }); 
-
-        public static Piece Y = new Piece(new List<Coord>
-        {
-            new Coord(0, 2),
-            new Coord(0, 1),
-            new Coord(0, 0),
-            new Coord(1, 0),
-            new Coord(0, -1)
-        }); 
-
         public static Piece N = new Piece(new List<Coord>
         {
             new Coord(-2, 0),
@@ -182,28 +168,29 @@ namespace BlokusAI.CommonStuff.Pieces
         */
         public static Dictionary<string, Piece> AllPieces = new Dictionary<string, Piece>
         {
-            /*{ "L5", L5 }, 
-            { "Y", Y }, 
-            { "N", N }, 
-            { "V3", V3 }, 
-            { "U", U }, 
-            { "V5", V5 }, 
-            { "Z5", Z5 }, 
-            { "X", X }, 
-            { "T5", T5 }, 
-            { "W", W }, 
-            { "P", P }, 
-            { "F", F }, 
-            { "O4", O4 }, 
-            { "L4", L4 }, 
-            { "T4", T4 }, 
-            { "Z4", Z4 }, 
-            { "I1", I1 }, 
-            { "I2", I2 }, 
-            { "I3", I3 }, 
-            { "I4", I4 }, 
-            { "I5", I5 }
-             */
+            { "L5", l5 }, 
+            { "Y", y },   /*
+            { "N", N },   /*
+            { "V3", V3 }, /*
+            { "U", U },   /*
+            { "V5", V5 }, /*
+            { "Z5", Z5 }, /*
+            { "X", X },   /*
+            { "T5", T5 }, /*
+            { "W", W },   /*
+            { "P", P },   /*
+            { "F", F },   /*
+            { "O4", O4 }, /*
+            { "L4", L4 }, /*
+            { "T4", T4 }, /*
+            { "Z4", Z4 }, /*
+            { "I1", I1 }, /*
+            { "I2", I2 }, /*
+            { "I3", I3 }, /*
+            { "I4", I4 }, /*
+            { "I5", I5 }  /*
+                          */
+            {"", null}
         };
          
         

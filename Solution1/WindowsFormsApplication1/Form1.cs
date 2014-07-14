@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1
         public Form1()
         { InitializeComponent(); }
 
-        private Piece p = Piece.AllPieces["X"];
+        private Piece p = Piece.AllPieces["L5"];
         private CommonGrid grid = new CommonGrid();
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -25,6 +25,9 @@ namespace WindowsFormsApplication1
                 graph.DrawLine(pen, i * 21, 0, i * 21, 295);
             }
             var br = new SolidBrush(Color.Orange);
+
+            //SQUARES
+
             for (int i = 0; i < 14; i++)
             {
                 for (int j = 0; j < 14; j++)
@@ -38,6 +41,8 @@ namespace WindowsFormsApplication1
                 }
             }
 
+            //NUKLEATIONS
+
             for (int i = 0; i < 14; i++)
             {
                 for (int j = 0; j < 14; j++)
@@ -48,8 +53,32 @@ namespace WindowsFormsApplication1
                         var ay = j * 21;
                         graph.DrawEllipse(pen, ax + 6, ay + 6, 10, 10);
                     }
+
                 }
             }
+
+            foreach (Nukleation n in p.Nukleations)
+            {
+                var ax = (n.X + 6) * 21;
+                var ay = (n.Y + 6) * 21;
+                switch (n.Orientation)
+                {
+                    case NukleationOrientation.NE:
+                        graph.DrawLine(pen, ax + 15, ay + 5, ax + 20, ay);
+                        break;
+                    case NukleationOrientation.SE:
+                        graph.DrawLine(pen, ax + 15, ay + 15, ax + 20, ay + 20);
+                        break;
+                    case NukleationOrientation.SW:
+                        graph.DrawLine(pen, ax + 5, ay + 15, ax, ay + 20);
+                        break;
+                    case NukleationOrientation.NW:
+                        graph.DrawLine(pen, ax + 5, ay + 5, ax, ay);
+                        break;
+                }
+            }
+
+            //NOPES
 
             for (int i = 0; i < 14; i++)
             {
@@ -140,6 +169,13 @@ namespace WindowsFormsApplication1
                     while (textBox6.Text.Length < 8)
                         textBox6.Text = "0" + textBox6.Text;
                 }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            p = p.Reflect(Axis.X);
+            CreateGraphics().Clear(this.BackColor);
+            this.RaisePaintEvent(null, null);
         }
     }
 }

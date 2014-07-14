@@ -9,27 +9,22 @@ using System.Linq;
 
 namespace BlokusAI.CommonStuff.Pieces
 {
-    public class X : Piece
+    public class O4 : Piece
     {
-        public static X instance = new X();
-        public X()
+        public static O4 instance = new O4();
+        public O4()
             : base(new Coord[]{
+            new Coord(0,0),
             new Coord(1,0),
             new Coord(0,1),
-            new Coord(1,1),
-            new Coord(2,1),
-            new Coord(1,2)},
+            new Coord(1,1)},
                 new Nukleation[]{
-            new Nukleation(1,0,2),
-            new Nukleation(1,0,4),
-            new Nukleation(2,1,4),
-            new Nukleation(2,1,6),
-            new Nukleation(1,2,6),
-            new Nukleation(1,2,0),
             new Nukleation(0,1,0),
-            new Nukleation(0,1,2)},
+            new Nukleation(0,0,2),
+            new Nukleation(1,0,4),
+            new Nukleation(1,1,6)},
                 new Piece[]{
-            X.instance})
+            O4.instance})
         { }
     }
 

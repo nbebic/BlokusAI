@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlokusAI.CommonStuff
 {
-    enum NukleationOrientation
+    public enum NukleationOrientation
     {
         NE = 0,
         SE = 2,

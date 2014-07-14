@@ -7,13 +7,18 @@ namespace BlokusAI.CommonStuff.Pieces
 {
     public partial class Piece
     {
-        public Coord[] D;
-
+        public Coord[] D { get; set; }
+        public Nukleation[] Nukleations { get; set; }
+        public Piece[] Orbits { get; set; }
         public Piece()
         { }
 
-        public Piece(List<Coord> list)
-        { D = list.ToArray(); }
+        public Piece(Coord[] d, Nukleation[] n, Piece[] orb)
+        {
+            this.D = d;
+            this.Nukleations = n;
+            this.Orbits = orb;
+        }
 
         public virtual Piece Reflect(Axis axis)
         {
@@ -30,15 +35,19 @@ namespace BlokusAI.CommonStuff.Pieces
 
         protected virtual Piece ReflectX()
         {
-            foreach (Coord c in D)
-                c.Y = (sbyte)-c.Y;
+            foreach (var c in D)
+                c.X = -c.X;
+            foreach (var n in Nukleations)
+                n.X = -n.X;
             return this;
         }
 
         protected virtual Piece ReflectY()
         {
-            foreach (Coord c in D)
-                c.X = (sbyte)-c.X;
+            foreach (var c in D)
+                c.X = -c.X;
+            foreach (var n in Nukleations)
+                n.X = -n.X;
             return this;
         }
 
@@ -64,7 +73,10 @@ namespace BlokusAI.CommonStuff.Pieces
         protected virtual Piece Rot90()
         {
             for (int i = 0; i < D.Length; i++)
+            {
                 D[i] = new Coord(D[i].Y, ((sbyte)-D[i].X));
+                Nukleations[i] = new Nukleation(Nukleations[i].Y, ((sbyte)-Nukleations[i].X), (byte)(((int)Nukleations[i].Orientation + 6) % 8));
+            }
             return this;
         }
 

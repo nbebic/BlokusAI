@@ -31,9 +31,13 @@ namespace PieceGenerator
         {
             var str = new StringBuilder();
 
-            #region coords
+            
             str.AppendLine("    public class [NAME][EXT] : Piece {");
-            str.AppendLine("        public Coord[] D = {");
+
+            str.AppendLine("        public static [NAME][EXT] instance = new [NAME][EXT]();");
+
+            #region coords
+            str.AppendLine("        public [NAME][EXT]() : base ( new Coord[]{");
             if (cbxD1.Checked)
                 str.AppendLine("            new Coord([DX1],[DY1]),");
             if (cbxD2.Checked)
@@ -46,10 +50,10 @@ namespace PieceGenerator
                 str.AppendLine("            new Coord([DX5],[DY5]),");
             #endregion
             str.Remove(str.Length - 3, 3);
-            str.AppendLine("\n      };");
-
+            str.AppendLine("},");
+            
             #region nukleations
-            str.AppendLine("        public Nukleation[] Nukleations = {");
+            str.AppendLine("new Nukleation[]{");
             if (cbxN1.Checked)
                 str.AppendLine("            new Nukleation([NX1],[NY1],[NO1]),");
             if (cbxN2.Checked)
@@ -68,9 +72,11 @@ namespace PieceGenerator
                 str.AppendLine("            new Nukleation([NX8],[NY8],[NO8]),");
             #endregion
             str.Remove(str.Length - 3, 3);
-            str.AppendLine("\n      };");
+            str.AppendLine("},");
 
             Orbits(ref str);
+
+            str.AppendLine("{  }");
 
             str.AppendLine("    }");
 
@@ -117,24 +123,24 @@ namespace PieceGenerator
 
         private void Orbits(ref StringBuilder str)
         {
-            str.AppendLine("        public Piece[] Orbits = {");
-            str.AppendLine("            new [NAME](),");
+            str.AppendLine("new Piece[]{");
+            str.AppendLine("            [NAME].instance,");
             if (cbxR90.Checked)
-                str.AppendLine("            new [NAME]90(),");
+                str.AppendLine("            [NAME]90.instance,");
             if (cbxR180.Checked)
-                str.AppendLine("            new [NAME]180(),");
+                str.AppendLine("            [NAME]180.instance,");
             if (cbxR270.Checked)
-                str.AppendLine("            new [NAME]270(),");
+                str.AppendLine("            [NAME]270.instance,");
             if (cbxRR.Checked)
-                str.AppendLine("            new [NAME]R(),");
+                str.AppendLine("            [NAME]R.instance,");
             if (cbxRR90.Checked)
-                str.AppendLine("            new [NAME]R90(),");
+                str.AppendLine("            [NAME]R90.instance,");
             if (cbxRR180.Checked)
-                str.AppendLine("            new [NAME]R180(),");
+                str.AppendLine("            [NAME]R180.instance,");
             if (cbxRR270.Checked)
-                str.AppendLine("            new [NAME]R270(),");
+                str.AppendLine("            [NAME]R270.instance,");
             str.Remove(str.Length - 3, 3);
-            str.AppendLine("\n      };");
+            str.AppendLine("})");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -142,7 +148,13 @@ namespace PieceGenerator
             var str = new StringBuilder();
             str.AppendLine("using System;");
             str.AppendLine("using System.Linq;");
-            str.AppendLine();
+            str.AppendLine(@"
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * The following batch of code was generated automaticaly. *
+ *     Do not try to manualy modify or understand it.      *
+ *        Any such attempts will end in a failiure.        *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+");
             str.AppendLine("namespace BlokusAI.CommonStuff.Pieces {");
             #region def
             int dx1 = 0;
@@ -396,7 +408,7 @@ namespace PieceGenerator
 
             str.AppendLine("}");
             textBox1.Text = str.ToString();
-            
+
         }
 
 
