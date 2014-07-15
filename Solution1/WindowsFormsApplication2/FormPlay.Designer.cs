@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication2
 {
-    partial class FormPlayFFS
+    partial class FormPlay
     {
         /// <summary>
         /// Required designer variable.

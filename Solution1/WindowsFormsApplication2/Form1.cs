@@ -40,7 +40,7 @@ namespace WindowsFormsApplication2
             {
                 if (ValidateAssembly(txtPlayer2.Text, out pl2))
                 {
-                    FormPlayFFS form = new FormPlayFFS(pl1, pl2);
+                    FormPlay form = new FormPlay(pl1, pl2);
                     form.Show();
                     form.Start();
                 }

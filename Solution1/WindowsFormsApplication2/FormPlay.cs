@@ -6,13 +6,13 @@ using BlokusAI.CommonStuff.Pieces;
 
 namespace WindowsFormsApplication2
 {
-    public partial class FormPlayFFS : Form
+    public partial class FormPlay : Form
     {
 
         private readonly IBlokusAI pl1;
         private readonly IBlokusAI pl2;
 
-        public FormPlayFFS(IBlokusAI pl1, IBlokusAI pl2)
+        public FormPlay(IBlokusAI pl1, IBlokusAI pl2)
         {
             this.pl1 = pl1;
             this.pl2 = pl2;
