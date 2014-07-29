@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BlokusAI.CommonStuff.Pieces;
+using System.Collections.Generic;
 
 namespace BlokusAI.CommonStuff
 {
@@ -9,39 +10,123 @@ namespace BlokusAI.CommonStuff
     /// </summary>
     public class CommonGrid
     {
-        protected byte[,] squares = new byte[14, 14];
-        protected byte[,] nope = new byte[14, 14];
-        protected byte[,] nukleation = new byte[14, 14];
-
         public CommonGrid()
-        { }
-
-        /** <summary>
-             Represents Nukleation Points on the Board in this Bit Pattern:<br />
-             0000000X - NE for player 1
-             000000X0 - NE for player 2
-             00000X00 - SE for player 1
-             0000X000 - SE for player 2
-             000X0000 - SW for player 1
-             00X00000 - SW for player 2
-             0X000000 - NW for player 1
-             X0000000 - NW for player 2
-               </summary>
-         */
-        public byte[,] Nukleation
         {
-            get { return nukleation; }
+            nopeList = new List<NopeSquare>();
+            nukleations = new List<Nukleation>();
         }
+        
+        public byte[,] squares = new byte[14, 14];
+
+        public List<NopeSquare> nopeList
+        {
+            get;
+            protected set;
+        }
+
+        public List<Nukleation> nukleations
+        {
+            get;
+            protected set;
+        }
+
+        //=========================================================//
+
+        public void AddNukleation(int x, int y, NukleationOrientation orient, Player player)
+        {
+            nukleations.Add(new Nukleation(x, y, orient, player));
+        }
+
+        public bool HasNukleation(int x, int y, NukleationOrientation orient, Player player)
+        {
+            foreach (Nukleation n in nukleations)
+            {
+                if (n.X == x)
+                    if (n.Y == y)
+                        if (n.Orientation == orient)
+                            if (n.player == player)
+                                return true;
+            }
+            return false;
+        }
+        public bool HasNukleation(int x, int y, Player player)
+        {
+            foreach (Nukleation n in nukleations)
+            {
+                if (n.X == x)
+                    if (n.Y == y)
+                        if (n.player == player)
+                            return true;
+            }
+            return false;
+        }
+
+        public void DelNukleation(int x, int y, Player player)
+        {
+            foreach (Nukleation n in nukleations)
+                if (n.X == x)
+                    if (n.Y == y)
+                        if (n.player == player)
+                            nukleations.Remove(n);
+        }
+        public void DelNukleation(int x, int y)
+        {
+            foreach (Nukleation n in nukleations)
+                if (n.X == x)
+                    if (n.Y == y)
+                        nukleations.Remove(n);
+        }
+
+        //=========================================================//
+
+        public void AddNope(int x, int y, Player player)
+        {
+            nopeList.Add(new NopeSquare(x, y, player));
+        }
+        public void AddNope(int x, int y)
+        {
+            AddNope(x, y, Player.PL1);
+            AddNope(x, y, Player.PL2);
+        }
+
+        public bool HasNope(int x, int y, Player player)
+        {
+            foreach (NopeSquare n in nopeList)
+            {
+                if (n.x == x)
+                    if (n.y == y)
+                        if (n.player == player)
+                            return true;
+            }
+            return false;
+        }
+
+        public void DelNope(int x, int y)
+        {
+            foreach (NopeSquare n in nopeList)
+                if (n.x == x)
+                    if (n.y == y)
+                        nopeList.Remove(n);
+        }
+
+        /// <summary>
+        /// Represents Nukleation Points on the Board in this Bit Pattern:<br />
+        /// 0000000X - NE for player 1
+        /// 000000X0 - NE for player 2
+        /// 00000X00 - SE for player 1
+        /// 0000X000 - SE for player 2
+        /// 000X0000 - SW for player 1
+        /// 00X00000 - SW for player 2
+        /// 0X000000 - NW for player 1
+        /// X0000000 - NW for player 2
+        /// </summary>
+        ///
 
         /// <summary>
         /// Represents Nope Squares on the Board in this Bit Pattern:
         /// 00 00 00 01 - Nope for player 1
         /// 00 00 00 10 - Nope for player 2
         /// </summary>
-        public byte[,] Nope
-        {
-            get { return nope; }
-        }
 
         /// <summary>
         /// Represents Square Ocupation on the Board in this Bit Pattern:
@@ -67,8 +152,8 @@ namespace BlokusAI.CommonStuff
             {
                 var r = new CommonGrid();
                 r.squares = this.squares;
-                r.nope = this.nope;
-                r.nukleation = this.nukleation;
+                r.nopeList = this.nopeList;
+                r.nukleations = this.nukleations;
                 return r;
             }
         }
@@ -84,7 +169,7 @@ namespace BlokusAI.CommonStuff
         /// <exception cref="IllegalMoveException">Throws if the move is not permited</exception>
         /// <exception cref="ArgumentException">Throws if piece is out of board bounds</exception>
         /// <returns>this</returns>
-        public virtual CommonGrid Move(Piece p, int x, int y, byte player, bool manualOverride)
+        public virtual CommonGrid Move(Piece p, int x, int y, Player player, bool manualOverride)
         {
             if (!(manualOverride || SafeToMove(p, x, y, player)))
                 throw new IllegalMoveException("nope");// TODO Add some more descriptive text
@@ -94,45 +179,53 @@ namespace BlokusAI.CommonStuff
                 int ax = c.X + x, ay = c.Y + y;
                 if (!((ax < 0) || (ay < 0) || (ax > 13) || (ay > 13)))
                 {
-                    squares[ax, ay] |= player;
-                    Nukleation[ax, ay] = 0;
-                    nope[ax, ay] = 3;
+                    squares[ax, ay] |= (byte)player;
+                    DelNukleation(ax, ay);
+                    AddNope(ax, ay);
                 }
                 if (ax > 0)
-                    nope[ax - 1, ay] |= player;
+                    AddNope(ax - 1, ay, player);
                 if (ax < 13)
-                    nope[ax + 1, ay] |= player;
+                    AddNope(ax + 1, ay, player);
                 if (ay > 0)
-                    nope[ax, ay - 1] |= player;
+                    AddNope(ax, ay - 1, player);
                 if (ay < 13)
-                    nope[ax, ay + 1] |= player;
+                    AddNope(ax, ay + 1, player);
             }
 
             foreach (Coord c in p.D)
             {
                 int ax = c.X + x, ay = c.Y + y;
                 if (ay < 13)
-                { 
+                {
                     //NE
                     if (ax > 0)
-                        nukleation[ax - 1, ay + 1] |= (byte)(((squares[ax - 1, ay + 1] == 0) && ((nope[ax - 1, ay + 1] & player) == 0)) ? player : 0);
+                        if (squares[ax-1, ay+1] == 0)
+                            if (!HasNope(ax-1, ay+1,player))
+                                AddNukleation(ax - 1, ay + 1, NukleationOrientation.NE, player);
                     //SE
                     if (ax < 13)
-                        nukleation[ax + 1, ay + 1] |= (byte)(((squares[ax + 1, ay + 1] == 0) && ((nope[ax + 1, ay + 1] & player) == 0)) ? player << 2 : 0);
+                        if (squares[ax+1, ay+1] == 0)
+                            if (!HasNope(ax+1, ay+1,player))
+                                AddNukleation(ax + 1, ay + 1, NukleationOrientation.SE, player);
                 }
                 if (ay > 0)
                 {
                     //NW
                     if (ax > 0)
-                        nukleation[ax - 1, ay - 1] |= (byte)(((squares[ax - 1, ay - 1] == 0) && ((nope[ax - 1, ay - 1] & player) == 0)) ? player << 6 : 0);
+                        if (squares[ax-1, ay-1] == 0)
+                            if (!HasNope(ax-1, ay-1,player))
+                                AddNukleation(ax - 1, ay - 1, NukleationOrientation.NW, player);
                     //SW
                     if (ax < 13)
-                        nukleation[ax + 1, ay - 1] |= (byte)(((squares[ax + 1, ay - 1] == 0) && ((nope[ax + 1, ay - 1] & player) == 0)) ? player << 4 : 0);
+                        if (squares[ax+1, ay-1] == 0)
+                            if (!HasNope(ax+1, ay-1,player))
+                                AddNukleation(ax + 1, ay - 1, NukleationOrientation.SW, player);
                 }
             }
             return this;
         }
-  
+
         /// <summary>
         /// Checks if the move is valid and preforms it if so, else throws an exception
         /// </summary>
@@ -142,10 +235,10 @@ namespace BlokusAI.CommonStuff
         /// <param name="player">player no (1 or 2)</param>
         /// <exception cref="IllegalMoveException">Throws if the move is not permited</exception>
         /// <returns>this</returns>
-        public virtual CommonGrid Move(Piece p, int x, int y, byte player)
+        public virtual CommonGrid Move(Piece p, int x, int y, Player player)
         { return Move(p, x, y, player, false); }
-  
-        public bool SafeToMove(Piece p, int x, int y, byte player)
+
+        public bool SafeToMove(Piece p, int x, int y, Player player)
         {
             var b = false;
             for (int i = 0; i < p.D.Length; i++)
@@ -155,9 +248,9 @@ namespace BlokusAI.CommonStuff
                     return false;
                 if (squares[ax, ay] != 0)
                     return false;
-                if ((nope[ax, ay] & player) > 0)
+                if (HasNope(ax, ay, player))
                     return false;
-                if ((Nukleation[ax, ay] & (player | (player << 2) | (player << 4) | (player << 6))) > 0)
+                if (HasNukleation(ax, ay, player))
                     b = true;
                 if ((ax == 4) && (ay == 4))
                     b = true;

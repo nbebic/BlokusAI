@@ -11,12 +11,16 @@ namespace BlokusAI.CommonStuff
         public int X;
         public int Y;
         public NukleationOrientation Orientation;
-        public Nukleation(int x, int y, byte orientation)
+        public Player player;
+        public Nukleation(int x, int y, NukleationOrientation orientation, Player player)
         {
             X = x;
             Y = y;
-            Orientation = (NukleationOrientation)orientation;
+            Orientation = orientation;
+            this.player = player;
         }
+        internal Nukleation(int x, int y, byte o)
+            : this(x, y, (NukleationOrientation)(o==0?4:((o==4)?0:o)), Player.Both) { }
 
         public static implicit operator Coord(Nukleation n)
         {

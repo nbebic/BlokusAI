@@ -60,9 +60,9 @@ namespace WindowsFormsApplication2
                 CountPl2 = 0;
             }
 
-            public override CommonGrid Move(Piece p, int x, int y, byte player, bool manualOverride)
+            public override CommonGrid Move(Piece p, int x, int y, Player player, bool manualOverride)
             {
-                if (player == 1)
+                if (player == Player.PL1)
                     CountPl1 += p.D.Length;
                 else
                     CountPl2 += p.D.Length;

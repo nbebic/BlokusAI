@@ -5,13 +5,23 @@ using System.Linq;
 
 namespace BlokusAI.CommonStuff.Pieces
 {
-    public partial class Piece
+    public partial class Piece : ICloneable
     {
         public Coord[] D { get; set; }
         public Nukleation[] Nukleations { get; set; }
         public Piece[] Orbits { get; set; }
         public Piece()
         { }
+        public Piece(int dl, int nl, int ol)
+        {
+            this.D = new Coord[dl];
+            for (int i = 0; i < D.Length; i++)
+                D[i] = new Coord(0, 0);
+            this.Nukleations = new Nukleation[nl];
+            for (int i = 0; i < Nukleations.Length; i++)
+                Nukleations[i] = new Nukleation(0, 0, 0);
+            this.Orbits = new Piece[ol];
+        }
 
         public Piece(Coord[] d, Nukleation[] n, Piece[] orb)
         {
@@ -35,20 +45,32 @@ namespace BlokusAI.CommonStuff.Pieces
 
         protected virtual Piece ReflectX()
         {
-            foreach (var c in D)
-                c.X = -c.X;
-            foreach (var n in Nukleations)
-                n.X = -n.X;
-            return this;
+            var copy = (Piece)this.Clone();
+            for (int i = 0; i < D.Length; i++)
+                copy.D[i].Y = -D[i].Y;
+            for (int i = 0; i < Nukleations.Length; i++)
+            {
+                copy.Nukleations[i].Y = -Nukleations[i].Y;
+                copy.Nukleations[i].Orientation =
+                    (NukleationOrientation)((neglect(
+                        ((int)Nukleations[i].Orientation + 2) % 8
+                    ) + 6) % 8);
+            }
+            return copy;
         }
 
         protected virtual Piece ReflectY()
         {
-            foreach (var c in D)
-                c.X = -c.X;
-            foreach (var n in Nukleations)
-                n.X = -n.X;
-            return this;
+            var copy = (Piece)this.Clone();
+            for (int i = 0; i < D.Length; i++)
+                copy.D[i].X = -D[i].X;
+            for (int i = 0; i < Nukleations.Length; i++)
+            {
+                copy.Nukleations[i].X = -Nukleations[i].X;
+                copy.Nukleations[i].Orientation =
+                    (NukleationOrientation)neglect((int)Nukleations[i].Orientation);
+            }
+            return copy;
         }
 
         protected virtual Piece ReflectBoth()
@@ -72,12 +94,21 @@ namespace BlokusAI.CommonStuff.Pieces
 
         protected virtual Piece Rot90()
         {
+            var copy = (Piece)this.Clone();
             for (int i = 0; i < D.Length; i++)
             {
-                D[i] = new Coord(D[i].Y, ((sbyte)-D[i].X));
-                Nukleations[i] = new Nukleation(Nukleations[i].Y, ((sbyte)-Nukleations[i].X), (byte)(((int)Nukleations[i].Orientation + 6) % 8));
+                copy.D[i] = new Coord(D[i].Y, ((sbyte)-D[i].X));
+
             }
-            return this;
+            for (int i = 0; i < Nukleations.Length; i++)
+            {
+                copy.Nukleations[i] = new Nukleation(
+                    Nukleations[i].Y,
+                    ((sbyte)-Nukleations[i].X),
+                    (byte)(((int)Nukleations[i].Orientation + 6) % 8)
+                    );
+            }
+            return copy;
         }
 
         protected virtual Piece Rot180()
@@ -85,5 +116,26 @@ namespace BlokusAI.CommonStuff.Pieces
 
         protected virtual Piece Rot270()
         { return Rot180().Rot90(); }
+
+        public object Clone()
+        {
+            var copy = new Piece(D.Length, Nukleations.Length, Orbits.Length);
+            copy.D = this.D;
+            copy.Nukleations = this.Nukleations;
+            copy.Orbits = this.Orbits;
+            return copy;
+        }
+
+        public static int neglect(int a)
+        {
+            switch (a)
+            {
+                case 0: return 6;
+                case 6: return 0;
+                case 2: return 4;
+                case 4: return 2;
+                default: return 0;
+            }
+        }
     }
 }
