@@ -132,22 +132,9 @@ namespace WindowsFormsApplication1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //int x2,y2;
-            //if (Int32.TryParse(textBox2.Text, out x2))
-            //    if (Int32.TryParse(textBox3.Text, out y2))
-            //    {
-            //        var x = (byte)x2;
-            //        var y = (byte)y2;
-            //        textBox4.Text = Convert.ToString(grid.Squares[x, y], 2);
-            //        while (textBox4.Text.Length < 8)
-            //            textBox4.Text = "0" + textBox4.Text;
-            //        textBox5.Text = Convert.ToString(grid.Nope[x, y], 2);
-            //        while (textBox5.Text.Length < 8)
-            //            textBox5.Text = "0" + textBox5.Text;
-            //        textBox6.Text = Convert.ToString(grid.Nukleation[x, y], 2);
-            //        while (textBox6.Text.Length < 8)
-            //            textBox6.Text = "0" + textBox6.Text;
-            //    }
+            while (AiTest.Play(grid) == 1);
+            this.CreateGraphics().Clear(this.BackColor);
+            this.RaisePaintEvent(null, null);
         }
 
         private void button5_Click(object sender, EventArgs e)

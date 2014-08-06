@@ -63,18 +63,22 @@ namespace BlokusAI.CommonStuff
 
         public void DelNukleation(int x, int y, Player player)
         {
+            var c = nukleations;
             foreach (Nukleation n in nukleations)
                 if (n.X == x)
                     if (n.Y == y)
                         if (n.player == player)
-                            nukleations.Remove(n);
+                            c.Remove(n);
+            nukleations = c;
         }
         public void DelNukleation(int x, int y)
         {
+            var c = nukleations.ToList();
             foreach (Nukleation n in nukleations)
                 if (n.X == x)
                     if (n.Y == y)
-                        nukleations.Remove(n);
+                        c.Remove(n);
+            nukleations = c;
         }
 
         //=========================================================//
@@ -108,25 +112,6 @@ namespace BlokusAI.CommonStuff
                     if (n.y == y)
                         nopeList.Remove(n);
         }
-
-        /// <summary>
-        /// Represents Nukleation Points on the Board in this Bit Pattern:<br />
-        /// 0000000X - NE for player 1
-        /// 000000X0 - NE for player 2
-        /// 00000X00 - SE for player 1
-        /// 0000X000 - SE for player 2
-        /// 000X0000 - SW for player 1
-        /// 00X00000 - SW for player 2
-        /// 0X000000 - NW for player 1
-        /// X0000000 - NW for player 2
-        /// </summary>
-        ///
-
-        /// <summary>
-        /// Represents Nope Squares on the Board in this Bit Pattern:
-        /// 00 00 00 01 - Nope for player 1
-        /// 00 00 00 10 - Nope for player 2
-        /// </summary>
 
         /// <summary>
         /// Represents Square Ocupation on the Board in this Bit Pattern:
